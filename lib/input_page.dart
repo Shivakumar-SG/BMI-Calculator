@@ -32,36 +32,35 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: ReusableCard(
+                      //refracted or reduced the code.
+
+                      onPressed: () {
+                        // using function as a object/property
                         setState(() {
                           selectedCard = ColorCardType.maleCard;
                         });
                       },
-                      child: ReusableCard(
-                        colour: selectedCard == ColorCardType.maleCard
-                            ? tileColor
-                            : inactiveColor,
-                        cardChild: ColumnIcon(
-                            icon: FontAwesomeIcons.mars, label: 'MALE'),
-                      ),
+                      colour: selectedCard == ColorCardType.maleCard
+                          ? tileColor
+                          : inactiveColor,
+                      cardChild: ColumnIcon(
+                          icon: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: ReusableCard(
+                      onPressed: () {
                         setState(() {
                           selectedCard = ColorCardType.femaleCard;
                         });
                       },
-                      child: ReusableCard(
-                        colour: selectedCard == ColorCardType.femaleCard
-                            ? tileColor
-                            : inactiveColor,
-                        cardChild: ColumnIcon(
-                          icon: FontAwesomeIcons.venus,
-                          label: 'FEMALE',
-                        ),
+                      colour: selectedCard == ColorCardType.femaleCard
+                          ? tileColor
+                          : inactiveColor,
+                      cardChild: ColumnIcon(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
                       ),
                     ),
                   ),
