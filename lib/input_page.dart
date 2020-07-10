@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'column_icon.dart';
-
-const Color tileColor = Color(0xFF1D1E33);
-const Color inactiveColor = Color(0xFF111328);
-const bottomContainerColor = Colors.pinkAccent;
+import 'constants.dart';
 
 enum ColorCardType {
   maleCard,
@@ -20,6 +17,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   ColorCardType selectedCard;
 
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +25,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               child: Row(
@@ -42,8 +41,8 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       colour: selectedCard == ColorCardType.maleCard
-                          ? tileColor
-                          : inactiveColor,
+                          ? ktileColor
+                          : kinactiveColor,
                       cardChild: ColumnIcon(
                           icon: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
@@ -56,8 +55,8 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       colour: selectedCard == ColorCardType.femaleCard
-                          ? tileColor
-                          : inactiveColor,
+                          ? ktileColor
+                          : kinactiveColor,
                       cardChild: ColumnIcon(
                         icon: FontAwesomeIcons.venus,
                         label: 'FEMALE',
@@ -69,7 +68,55 @@ class _InputPageState extends State<InputPage> {
             ),
             Expanded(
               child: ReusableCard(
-                colour: tileColor,
+                colour: kinactiveColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(
+                          height.toString(),
+                          style: klabelTxtStyle2,
+                        ),
+                        Text(
+                          'cm',
+                          style: klabelTextStyle,
+                        )
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        //copies all the properties but gives value to none.
+                        thumbColor: Colors.pinkAccent,
+                        activeTrackColor: Colors.white,
+                        overlayColor: Color(0x29EB1555),
+                        inactiveTrackColor: Colors.grey,
+                        thumbShape: RoundSliderThumbShape(
+                          enabledThumbRadius: 15.0,
+                        ),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 30.0),
+                      ),
+                      child: Slider(
+                        min: 100.0,
+                        max: 220.0,
+                        value: height.toDouble(),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                      ),
+                    ),
+                    Text(
+                      'HEIGHT',
+                      style: klabelTextStyle,
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -77,12 +124,12 @@ class _InputPageState extends State<InputPage> {
                 children: <Widget>[
                   Expanded(
                     child: ReusableCard(
-                      colour: tileColor,
+                      colour: ktileColor,
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      colour: tileColor,
+                      colour: ktileColor,
                     ),
                   ),
                 ],
@@ -90,11 +137,11 @@ class _InputPageState extends State<InputPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 10.0),
-              width: 300.0,
+              width: 30.0,
               height: 60.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: bottomContainerColor,
+                color: kbottomContainerColor,
               ),
             ),
           ],

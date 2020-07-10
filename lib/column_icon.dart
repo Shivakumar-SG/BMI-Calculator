@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 class ColumnIcon extends StatelessWidget {
   const ColumnIcon({this.icon, this.label});
@@ -20,10 +21,7 @@ class ColumnIcon extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-          ),
+          style: klabelTextStyle, // from constants file.
         ),
       ],
     );
