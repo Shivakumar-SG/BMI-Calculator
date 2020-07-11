@@ -1,8 +1,12 @@
+import 'package:bmi_calculator/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'column_icon.dart';
 import 'constants.dart';
+import 'result_page.dart';
+import 'bottom_button.dart';
+import 'round_icon_button.dart';
 
 enum ColorCardType {
   maleCard,
@@ -124,6 +128,7 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
             ),
+            //for weight and age
             Expanded(
               child: Row(
                 children: <Widget>[
@@ -220,44 +225,19 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10.0),
-              width: 30.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: kbottomContainerColor,
-              ),
-              child: Center(
-                child: Text(
-                  'CALCULATE YOUR BMI',
-                  style: klabelTextStyle,
-                ),
-              ),
+            //result page navigator
+            BottomButton(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(),
+                  ),
+                );
+              },
+              bottomText: 'Find your BMI',
             ),
           ],
         ));
-  }
-}
-
-// creating our own customised button
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({this.icon, this.onPressed});
-  final IconData icon;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      fillColor: Colors.white10,
-      shape: CircleBorder(),
-      constraints: BoxConstraints.tightFor(
-        height: 56.0,
-        width: 56.0,
-      ),
-      elevation: 10.0,
-      onPressed: onPressed,
-      child: Icon(icon),
-    );
   }
 }
