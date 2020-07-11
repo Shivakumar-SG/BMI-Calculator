@@ -18,6 +18,9 @@ class _InputPageState extends State<InputPage> {
   ColorCardType selectedCard;
 
   int height = 180;
+  int weight = 50;
+  int age = 25;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +30,7 @@ class _InputPageState extends State<InputPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            // for male and female card
             Expanded(
               child: Row(
                 children: <Widget>[
@@ -66,6 +70,7 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
+            //for height
             Expanded(
               child: ReusableCard(
                 colour: kinactiveColor,
@@ -89,7 +94,7 @@ class _InputPageState extends State<InputPage> {
                     ),
                     SliderTheme(
                       data: SliderTheme.of(context).copyWith(
-                        //copies all the properties but gives value to none.
+                        //copies all the properties but gives value to none. creating our own widget
                         thumbColor: Colors.pinkAccent,
                         activeTrackColor: Colors.white,
                         overlayColor: Color(0x29EB1555),
@@ -124,12 +129,92 @@ class _InputPageState extends State<InputPage> {
                 children: <Widget>[
                   Expanded(
                     child: ReusableCard(
-                      colour: ktileColor,
+                      colour: kinactiveColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            weight.toString(),
+                            style: klabelTxtStyle2,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight = weight - 1;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight = weight + 1;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'WEIGHT',
+                            style: klabelTextStyle,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      colour: ktileColor,
+                      colour: kinactiveColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            age.toString(),
+                            style: klabelTxtStyle2,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    age = age - 1;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    age = age + 1;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'AGE',
+                            style: klabelTextStyle,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -143,8 +228,36 @@ class _InputPageState extends State<InputPage> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: kbottomContainerColor,
               ),
+              child: Center(
+                child: Text(
+                  'CALCULATE YOUR BMI',
+                  style: klabelTextStyle,
+                ),
+              ),
             ),
           ],
         ));
+  }
+}
+
+// creating our own customised button
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({this.icon, this.onPressed});
+  final IconData icon;
+  final Function onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      fillColor: Colors.white10,
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(
+        height: 56.0,
+        width: 56.0,
+      ),
+      elevation: 10.0,
+      onPressed: onPressed,
+      child: Icon(icon),
+    );
   }
 }
